@@ -30,14 +30,14 @@ proc destroyEntity*(self: var WorldTree, entity: Entity) =
   self.signatures[entity] = {}
   self.entityCount -= 1
 
-#proc setComponentMask*(self: var WorldTree, entity: Entity, signature: Signature) =
-#  self.signatures[entity] = signature
+proc setComponentMask*(self: var WorldTree, entity: Entity, signature: Signature) =
+  self.signatures[entity] = signature
 
-#proc getComponentMask*(self: WorldTree, entity: Entity): Signature =
-#  if self.entityCount < entity:
-#    return {}
-#
-#  return self.signatures[entity]
+proc getComponentMask*(self: WorldTree, entity: Entity): Signature =
+  if self.entityCount < entity:
+    return {}
+
+  return self.signatures[entity]
 
 proc getComponentArray(self: var WorldTree, T: typedesc): var ComponentArray =
   let typeName = $(T.typeof)
