@@ -11,8 +11,7 @@ tree.registerComponentType(Existence)
 var e1 = tree.newEntity()
 var e2 = tree.newEntity()
 
-tree.addComponent(Existence, e1, Existence())
+tree.addComponent(Existence, e1, Existence(truth: false))
 
-var existence: Existence = getComponent[Existence](tree, e1)
-
-echo $(existence.truth)
+echo hasComponent[Existence](tree, e1)
+echo hasComponent[Existence](tree, e2)

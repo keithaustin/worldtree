@@ -24,3 +24,5 @@ proc getData*(self: ComponentArray, entity: Entity): Component =
   # Add bounds check here
   return self.componentArray[self.entityToIndexMap[entity]]
 
+proc contains*(self: ComponentArray, entity: Entity): bool =
+  return self.entityToIndexMap.contains(entity)
