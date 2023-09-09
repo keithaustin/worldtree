@@ -41,11 +41,7 @@ proc getComponentMask*(self: WorldTree, entity: Entity): Signature =
 
 proc getComponentArray(self: var WorldTree, T: typedesc): var ComponentArray =
   let typeName = $(T.typeof)
-
-  #if typeName in self.componentTypes:
   return self.componentData[typeName]
-
-  #return
 
 proc registerComponentType*(self: var WorldTree, T: typedesc) =
   let typeName = $(T.name)
