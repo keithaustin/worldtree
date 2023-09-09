@@ -1,4 +1,4 @@
-import ./src/[WorldTree, Component, Entity]
+import ./src/[WorldTree, Component]
 
 type
   Existence = ref object of Component
