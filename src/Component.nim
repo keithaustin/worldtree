@@ -4,10 +4,10 @@ import tables
 const max_components* = 32
 
 type 
-  Component* = object of RootObj
+  Component* = ref object of RootObj
   ComponentType* = int16
 
-  ComponentArray* = ref object
+  ComponentArray* = object
     componentArray: array[max_entities, Component]
     entityToIndexMap: Table[int, int]
     indexToEntityMap: Table[int, int]
@@ -23,3 +23,4 @@ proc insertData*(self: var ComponentArray, entity: Entity, component: Component)
 proc getData*(self: ComponentArray, entity: Entity): Component =
   # Add bounds check here
   return self.componentArray[self.entityToIndexMap[entity]]
+

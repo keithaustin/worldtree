@@ -30,16 +30,16 @@ proc destroyEntity*(self: var WorldTree, entity: Entity) =
   self.signatures[entity] = {}
   self.entityCount -= 1
 
-proc setComponentMask*(self: var WorldTree, entity: Entity, signature: Signature) =
-  self.signatures[entity] = signature
+#proc setComponentMask*(self: var WorldTree, entity: Entity, signature: Signature) =
+#  self.signatures[entity] = signature
 
-proc getComponentMask*(self: WorldTree, entity: Entity): Signature =
-  if self.entityCount < entity:
-    return {}
+#proc getComponentMask*(self: WorldTree, entity: Entity): Signature =
+#  if self.entityCount < entity:
+#    return {}
+#
+#  return self.signatures[entity]
 
-  return self.signatures[entity]
-
-proc getComponentArray(self: var WorldTree, T: typedesc): ComponentArray =
+proc getComponentArray(self: var WorldTree, T: typedesc): var ComponentArray =
   let typeName = $(T.typeof)
 
   if typeName in self.componentTypes:
@@ -58,5 +58,5 @@ proc registerComponentType*(self: var WorldTree, T: typedesc) =
 proc addComponent*(self: var WorldTree, T: typedesc, entity: Entity, component: Component) =
   self.getComponentArray(T).insertData(entity, component)
 
-proc getComponent*(self: WorldTree, T: typedesc, entity: Entity): Component = 
-  return self.getComponentArray[T]().getData(entity)
+proc getComponent*[T](self: var WorldTree, entity: Entity): T = 
+  return cast[T](self.getComponentArray(T).getData(entity))
