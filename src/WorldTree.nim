@@ -27,6 +27,10 @@ proc destroyEntity*(self: var WorldTree, entity: Entity) =
   if self.entityCount < entity:
     return
 
+  for componentType, componentArray in self.componentData:
+    self.componentData[componentType].entityRemoved(entity)
+    
+
   self.signatures[entity] = {}
   self.entityCount -= 1
 

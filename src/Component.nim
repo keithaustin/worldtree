@@ -38,6 +38,10 @@ proc removeData*(self: var ComponentArray, entity: Entity) =
 
   self.size -= 1
 
+proc entityRemoved*(self: var ComponentArray, entity: Entity) =
+  if self.entityToIndexMap.hasKey(entity):
+    self.removeData(entity)
+
 proc getData*(self: ComponentArray, entity: Entity): Component =
   # Add bounds check here
   return self.componentArray[self.entityToIndexMap[entity]]
