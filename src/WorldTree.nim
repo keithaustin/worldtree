@@ -43,7 +43,7 @@ proc getComponentArray(self: var WorldTree, T: typedesc): var ComponentArray =
   let typeName = $(T.typeof)
   return self.componentData[typeName]
 
-proc registerComponentType*[T](self: var WorldTree) =
+proc registerComponentType*[T: Component](self: var WorldTree) =
   let typeName = $(T.name)
   # Add bounds check here
 
@@ -51,14 +51,14 @@ proc registerComponentType*[T](self: var WorldTree) =
   self.componentData[typeName] = ComponentArray()
   self.nextComponentType += 1
 
-proc hasComponent*[T](self: var WorldTree, entity: Entity): bool = 
+proc hasComponent*[T: Component](self: var WorldTree, entity: Entity): bool = 
   return self.getComponentArray(T).contains(entity)
 
-proc addComponent*[T](self: var WorldTree, entity: Entity, component: Component) =
+proc addComponent*[T: Component](self: var WorldTree, entity: Entity, component: Component) =
   self.getComponentArray(T).insertData(entity, component)
 
-proc getComponent*[T](self: var WorldTree, entity: Entity): T = 
+proc getComponent*[T: Component](self: var WorldTree, entity: Entity): T = 
   return cast[T](self.getComponentArray(T).getData(entity))
 
-proc removeComponent*[T](self: var WorldTree, entity: Entity) =
+proc removeComponent*[T: Component](self: var WorldTree, entity: Entity) =
   self.getComponentArray(T).removeData(entity)
