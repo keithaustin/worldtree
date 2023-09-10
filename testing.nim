@@ -2,16 +2,17 @@ import ./src/[WorldTree, Component]
 
 type
   Existence = ref object of Component
-    truth: bool = true
 
 var tree = WorldTree()
 
 tree.registerComponentType(Existence)
 
 var e1 = tree.newEntity()
-var e2 = tree.newEntity()
 
-tree.addComponent(Existence, e1, Existence(truth: false))
+tree.addComponent(Existence, e1, Existence())
 
 echo hasComponent[Existence](tree, e1)
-echo hasComponent[Existence](tree, e2)
+
+removeComponent[Existence](tree, e1)
+
+echo hasComponent[Existence](tree, e1)

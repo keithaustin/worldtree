@@ -59,3 +59,6 @@ proc addComponent*(self: var WorldTree, T: typedesc, entity: Entity, component: 
 
 proc getComponent*[T](self: var WorldTree, entity: Entity): T = 
   return cast[T](self.getComponentArray(T).getData(entity))
+
+proc removeComponent*[T](self: var WorldTree, entity: Entity) =
+  self.getComponentArray(T).removeData(entity)

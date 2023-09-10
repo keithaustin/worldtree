@@ -20,6 +20,24 @@ proc insertData*(self: var ComponentArray, entity: Entity, component: Component)
   self.indexToEntityMap[newIndex] = entity
   self.componentArray[newIndex] = component
 
+  self.size += 1
+
+proc removeData*(self: var ComponentArray, entity: Entity) =
+  # Add bounds check here
+
+  let indexToRemove = self.entityToIndexMap[entity]
+  let lastIndex = self.size - 1
+  self.componentArray[indexToRemove] = self.componentArray[lastIndex]
+
+  let entityAtLastIndex = self.indexToEntityMap[lastIndex]
+  self.entityToIndexMap[entityAtLastIndex] = indexToRemove
+  self.indexToEntityMap[indexToRemove] = entityAtLastIndex
+
+  self.entityToIndexMap.del(entity)
+  self.indexToEntityMap.del(lastIndex)
+
+  self.size -= 1
+
 proc getData*(self: ComponentArray, entity: Entity): Component =
   # Add bounds check here
   return self.componentArray[self.entityToIndexMap[entity]]
