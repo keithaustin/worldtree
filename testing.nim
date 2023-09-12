@@ -3,17 +3,22 @@ import terminal
 import times
 import std/monotimes
 
-# Test component, just a flag
+# Declare components and systems
 type
+  # Stores the age of an entity in seconds
   Age = ref object of Component
     seconds = 0.0
 
+  # Keeps a consistent time between ticks (in seconds)
   Clock = ref object of Component
     lastTickTime: MonoTime
     currTickTime: MonoTime
     deltaTime: float
 
+  # Increments the age of affected entities each tick
   Time = ref object of System
+
+  # Performs the required logic to keep a Clock component consistent
   ClockSystem = ref object of System
 
 # Increases affected entities' ages in seconds
