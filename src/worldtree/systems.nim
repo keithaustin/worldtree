@@ -1,4 +1,4 @@
-import Entity
+import entity
 
 type
   System* = ref object of RootObj

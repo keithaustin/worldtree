@@ -1,8 +1,7 @@
-import Component
-import Entity
-import Systems
+import worldtree/[entity, component, systems]
 import tables
 import typetraits
+export component, entity, systems
 
 type
   # Entities' and Systems' signatures are used to keep entities

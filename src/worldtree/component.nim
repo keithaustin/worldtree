@@ -1,4 +1,4 @@
-import Entity
+import entity
 import tables
 
 const max_components* = 32
