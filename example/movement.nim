@@ -1,22 +1,3 @@
-# WorldTree - An ECS framework for Nim
-
-A small, lightweight ECS framework written in Nim. 
-
-This project is in early development, so expect bugs and breaking changes! Please test, break things, give suggestions or ask questions!
-
-## Usage
-
-First, make sure you're on the latest stable release of Nim(2.0.0 or later). Then, install with either
-
-`nimble install worldtree`
-
-or
-
-`nimble install https://github.com/keithaustin/worldtree`
-
-## A basic example
-
-```nim
 import worldtree
 
 # Declare components and systems
@@ -65,4 +46,4 @@ tree.addComponent[:Velocity](mover, Velocity(x: 3, y: 1))
 # Run the main loop
 while true:
   moveSystem.onTick(tree)
-```
+  echo "X: ", tree.getComponent[:Position](mover).x, ", Y: ", tree.getComponent[:Position](mover).y

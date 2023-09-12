@@ -5,4 +5,4 @@ license     = "MIT"
 
 srcDir      = "src"
 
-requires "nim >= 1.4.8"
+requires "nim >= 2.0.0"
