@@ -14,7 +14,8 @@ type
     size: int
 
 proc insertData*(self: var ComponentArray, entity: Entity, component: Component) = 
-  # Add bounds check here
+  assert(self.entityToIndexMap.hasKey(entity) == false, "Attempting to add a component that already exists")
+
   let newIndex = self.size
   self.entityToIndexMap[entity] = newIndex
   self.indexToEntityMap[newIndex] = entity
@@ -23,7 +24,7 @@ proc insertData*(self: var ComponentArray, entity: Entity, component: Component)
   self.size += 1
 
 proc removeData*(self: var ComponentArray, entity: Entity) =
-  # Add bounds check here
+  assert(self.entityToIndexMap.hasKey(entity), "Attempting to remove a component that doesn't exist")
 
   let indexToRemove = self.entityToIndexMap[entity]
   let lastIndex = self.size - 1

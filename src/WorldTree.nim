@@ -66,7 +66,7 @@ proc getComponentArray(self: var WorldTree, T: typedesc): var ComponentArray =
 # Registers a new component type
 proc registerComponentType*[T: Component](self: var WorldTree) =
   let typeName = $(T.name)
-  # Add bounds check here
+  assert(self.componentTypes.hasKey(typeName) == false, "Attempting to register a component twice")
 
   self.componentTypes[typeName] = self.nextComponentType
   self.componentData[typeName] = ComponentArray()
@@ -75,7 +75,7 @@ proc registerComponentType*[T: Component](self: var WorldTree) =
 # Returns the id of a component type in the registry
 proc getComponentType*[T: Component](self: var WorldTree): ComponentType =
   let typeName = $(T.name)
-  # Bounds check here
+  assert(self.componentTypes.hasKey(typeName), "Attempting to find a component type that isn't registered")
 
   return self.componentTypes[typeName]
 
@@ -110,7 +110,7 @@ proc removeComponent*[T: Component](self: var WorldTree, entity: Entity) =
 # Registers a new system
 proc registerSystem*[T: System](self: var WorldTree): T =
   let typeName = $(T.name)
-  # Bounds check goes here
+  assert(self.systems.hasKey(typeName) == false, "Cannot register a duplicate system.")
 
   var system = T()
   self.systems[typeName] = system
@@ -120,6 +120,6 @@ proc registerSystem*[T: System](self: var WorldTree): T =
 # Sets a system's signature
 proc setSystemSignature*[T: System](self: var WorldTree, signature: Signature) =
   let typeName = $(T.name)
-  # Add bounds check here
 
-  self.systemSignatures[typeName] = signature
+  if self.systems.hasKey(typeName):
+    self.systemSignatures[typeName] = signature
