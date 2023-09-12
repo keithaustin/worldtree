@@ -4,8 +4,12 @@ A framework for the Entity-Component-System architecture, written in Nim. This p
 
 ## What works so far?
 
-Currently, you can instantiate a registry, create and destroy entities, and attach or detach components. You can also get and update the data from a component.
+- Creating and destroying entities
+- Adding and removing components from entities
+- Reading and writing component data
+- Registering systems
+- Systems automatically check component sets against entities on add/remove component
 
 ## What doesn't work so far?
 
-Almost everything. 
+- The biggest thing by far right now is the way systems are run. Ideally the framework will decide automatically which systems to run and in which order, based on the components affected by each system, with the option to override this functionality. Currently, systems have to be run entirely manually.
