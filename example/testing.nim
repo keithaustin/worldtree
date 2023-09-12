@@ -1,4 +1,4 @@
-import ./src/[WorldTree, Component, Systems]
+import ../src/[WorldTree, Component, Systems]
 import terminal
 import times
 import std/monotimes
