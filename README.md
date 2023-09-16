@@ -4,6 +4,10 @@ A small, lightweight ECS framework written in Nim.
 
 This project is in early development, so expect bugs and breaking changes! Please test, break things, give suggestions or ask questions!
 
+## What is an ECS?
+ECS ("Entity Component System") refers to a "Data-Oriented" design approach that promotes code reusability by separating data from behaviour while also promoting data locality to improve performance by being cache-friendly. More info : [https://github.com/SanderMertens/ecs-faq](https://www.flecs.dev/ecs-faq/)
+
+
 ## Usage
 
 First, make sure you're on the latest stable release of Nim(2.0.0 or later). Then, install with either
